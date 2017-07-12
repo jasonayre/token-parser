@@ -20,7 +20,7 @@ describe('TokenParser#replace()', function() {
   });
 
   it('should replace simple expressions', function() {
-    var string = '[foo]'
+    var string = '{{foo}}'
       , context = {
           foo: 'Foo!'
         }
@@ -30,7 +30,19 @@ describe('TokenParser#replace()', function() {
   });
 
   it('should replace compound expressions', function() {
-    var string = '[foo.bar]'
+    var string = '{{foo.bar}}'
+      , context = {
+          foo: {
+            bar: 'Foo bar!'
+          }
+        }
+      , replaced = tokenParser.replace(string, context);
+
+    expect(replaced).to.be.equal(context.foo.bar);
+  });
+
+  it('should replace expressions referencing javascript object keys', function() {
+    var string = '{{foo["bar"]}}'
       , context = {
           foo: {
             bar: 'Foo bar!'
@@ -42,7 +54,7 @@ describe('TokenParser#replace()', function() {
   });
 
   it('should replace recursive expressions', function() {
-    var string = '[fo[bar]]'
+    var string = '{{foo {{bar}} }}'
       , context = {
           foo: 'Foo!',
           bar: 'o'
@@ -53,7 +65,7 @@ describe('TokenParser#replace()', function() {
   });
 
   it('should replace multiple expressions', function() {
-    var string = '[foo] & [bar]'
+    var string = '{{foo}} & {{bar}}'
       , context = {
           foo: 'Foo!',
           bar: 'Bar!'

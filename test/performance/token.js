@@ -3,7 +3,7 @@
  */
 
 var TokenParser = require('../../index')
-  , string = '[foo]'
+  , string = '{{foo}}'
   , context = { foo: 'Foo!' }
   , tokenParser;
 

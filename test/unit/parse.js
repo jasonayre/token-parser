@@ -23,7 +23,7 @@ describe('TokenParser#parse()', function() {
   });
 
   it('should parse simple expressions', function() {
-    var string = '[foo.bar]'
+    var string = '{{foo.bar}}'
       , tokens = tokenParser.scan(string)
       , nodes  = tokenParser.parse(tokens)
       , expression = nodes[0];
@@ -40,7 +40,7 @@ describe('TokenParser#parse()', function() {
   });
 
   it('should parse recursive expressions', function() {
-    var string = '[foo[bar]]'
+    var string = '{{foo {{bar}} }}'
       , tokens = tokenParser.scan(string)
       , nodes  = tokenParser.parse(tokens)
       , expression = nodes[0];
@@ -62,7 +62,7 @@ describe('TokenParser#parse()', function() {
   });
 
   it('should parse multiple expressions', function() {
-    var string = '[foo] & [bar]'
+    var string = '{{foo}} & {{bar}}'
       , tokens = tokenParser.scan(string)
       , nodes  = tokenParser.parse(tokens)
       , i = 0;

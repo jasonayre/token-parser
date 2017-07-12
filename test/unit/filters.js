@@ -12,7 +12,7 @@ var expect = require('expect.js')
     , lowercase: function (value) {
         return value.toLowerCase();
       }
-      // Trims a specific character from a string. 
+      // Trims a specific character from a string.
     , trim: function (haystack, needle) {
         if (typeof needle == 'undefined') return haystack.trim();
 
@@ -39,7 +39,7 @@ describe('Filters()', function() {
   it('should replace filtered expressions', function() {
     tokenParser.filter('uppercase', filters.uppercase);
 
-    var string = '[foo|uppercase]'
+    var string = '{{foo|uppercase}}'
       , context = {
           foo: 'Foo!'
         }
@@ -52,7 +52,7 @@ describe('Filters()', function() {
     tokenParser.filter('uppercase', filters.uppercase);
     tokenParser.filter('lowercase', filters.lowercase);
 
-    var string = '[foo|uppercase|lowercase]'
+    var string = '{{foo|uppercase|lowercase}}'
       , context = {
           foo: 'Foo!'
         }
@@ -64,7 +64,7 @@ describe('Filters()', function() {
   it('should replace argumented filtered expressions', function() {
     tokenParser.filter('trim', filters.trim);
 
-    var string = '[foo|trim:"!"]'
+    var string = '{{foo|trim:"!"}}'
       , context = {
           foo: 'Foo!'
         }
@@ -77,7 +77,7 @@ describe('Filters()', function() {
     tokenParser.filter('trim', filters.trim);
     tokenParser.filter('uppercase', filters.uppercase);
 
-    var string = '[foo|trim:"!"|uppercase]'
+    var string = '{{foo|trim:"!"|uppercase}}'
       , context = {
           foo: 'Foo!'
         }

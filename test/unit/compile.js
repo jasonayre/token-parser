@@ -25,7 +25,7 @@ describe('TokenParser#compile()', function() {
   });
 
   it('should compile simple expressions', function() {
-    var string = '[foo.bar]'
+    var string = '{{foo.bar}}'
       , node = tokenParser.compile(string);
 
     expect(node).to.be.an(tokenParser.nodeTypes.COMPOUND);
@@ -37,7 +37,7 @@ describe('TokenParser#compile()', function() {
   });
 
   it('should compile recursive expressions', function() {
-    var string = '[foo[bar]]'
+    var string = '{{foo {{bar}} }}'
       , node = tokenParser.compile(string);
 
     // Note that this is exactly equals to the simple expression test.
@@ -50,7 +50,7 @@ describe('TokenParser#compile()', function() {
   });
 
   it('should compile multiple expressions', function() {
-    var string = '[foo] & [bar]'
+    var string = '{{foo}} & {{bar}}'
       , node = tokenParser.compile(string);
 
     // Note that this is exactly equals to the simple expression test.
